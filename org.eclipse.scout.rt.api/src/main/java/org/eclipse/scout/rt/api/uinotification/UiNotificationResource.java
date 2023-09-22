@@ -76,6 +76,7 @@ public class UiNotificationResource implements IRestResource {
     return BEANS.get(IAccessControlService.class).getUserIdOfCurrentSubject();
   }
 
+  // FIXME cgu [REVIEW]: is this needed?
   @Path("sample")
   @POST
   @Consumes(MediaType.APPLICATION_JSON)

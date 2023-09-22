@@ -15,8 +15,9 @@ export type UiNotificationHandler = (notification: DoEntity) => void;
 let systems = new Map<string, System>();
 
 export const uiNotifications = {
-  systems: new Map,
+  systems: new Map, // FIXME cgu [REVIEW]: not used
 
+  // FIXME cgu [REVIEW]: handler is not optional
   subscribe(topic: string, handler?: UiNotificationHandler, system?: string) {
     scout.assertParameter('topic', topic);
     scout.assertParameter('handler', handler);
@@ -30,6 +31,7 @@ export const uiNotifications = {
     updatePoller(systemObj);
   },
 
+  // FIXME cgu [REVIEW]: handler is not optional
   one(topic: string, handler?: UiNotificationHandler, system?: string) {
     let offFunc = (event: DoEntity) => {
       this.unsubscribe(topic, offFunc, system);
@@ -49,6 +51,7 @@ export const uiNotifications = {
     let systemObj = getOrInitSystem(system);
     let subscriptions = systemObj.subscriptions;
     let handlers = subscriptions.get(topic) || new Set<UiNotificationHandler>();
+    // FIXME cgu [REVIEW]: this will not remove a handler added by 'one'
     if (handler) {
       handlers.delete(handler);
     } else {
@@ -60,6 +63,7 @@ export const uiNotifications = {
     updatePoller(systemObj);
   },
 
+  // FIXME cgu [REVIEW]: only for specs?
   get pollers(): Map<string, UiNotificationPoller> {
     return new Map<string, UiNotificationPoller>(Array.from(systems.entries())
       .filter(([, system]) => !!system.poller)
@@ -78,11 +82,13 @@ export const uiNotifications = {
     if (!system) {
       return;
     }
+    // FIXME cgu [REVIEW]: add stopPoller() to System?
     system.poller?.stop();
     systems.delete(name);
   },
 
   tearDown() {
+    // FIXME cgu [REVIEW]: system.stopPoller()?
     for (const poller of Object.values(this.pollers) as UiNotificationPoller[]) {
       poller.stop();
     }
@@ -90,6 +96,7 @@ export const uiNotifications = {
   }
 };
 
+// FIXME cgu [REVIEW]: system is optional
 function getOrInitSystem(system: string): System {
   if (!system && !systems.has('main')) {
     uiNotifications.registerSystem('main', 'api/ui-notifications');
@@ -102,6 +109,7 @@ function getOrInitSystem(system: string): System {
   return systemObj;
 }
 
+// FIXME cgu [REVIEW]: maybe move to System
 function updatePoller(system: System) {
   let topics = Array.from(system.subscriptions.keys());
   let poller = system.poller;

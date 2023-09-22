@@ -495,6 +495,7 @@ describe('uiNotifications', () => {
   });
 
   describe('unsubscribe', () => {
+    // FIXME cgu [REVIEW]: stops
     it('stopps the poller if the last topic is unsubscribed', () => {
       expect(uiNotifications.pollers.size).toBe(0);
 

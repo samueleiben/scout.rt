@@ -170,6 +170,7 @@ public class UiNotificationRegistryTest {
 
     m_registry.put(createMessage(), "topic", noTransaction());
     UiNotificationDo lastNotification2 = m_registry.getNotifications().get("topic").get(1).getNotification();
+    // FIXME cgu [REVIEW]: 1400.123
     lastNotification2.withCreationTime(DateUtility.parse("20220922 140000.123", "yyyyMMdd HHmm.SSS"));
 
     // Notification must not be returned, having two notifications with the same time is not allowed and should not be possible, see UiNotificationRegistry.updateNotificationCreationTime
@@ -191,6 +192,7 @@ public class UiNotificationRegistryTest {
     m_registry.put(createMessage(), "topic", noTransaction());
     UiNotificationDo lastNotificationNode2 = m_registry.getNotifications().get("topic").get(1).getNotification();
     lastNotificationNode2.withNodeId("node2");
+    // FIXME cgu [REVIEW]: 1359
     lastNotificationNode2.withCreationTime(DateUtility.parse("20220922 130059", "yyyyMMdd HHmm")); // The time of Node 2 is slightly behind Node 1
 
     // Return notifications from both nodes
@@ -199,11 +201,13 @@ public class UiNotificationRegistryTest {
     m_registry.put(createMessage(), "topic", noTransaction());
     UiNotificationDo lastNotification2Node1 = m_registry.getNotifications().get("topic").get(2).getNotification();
     lastNotification2Node1.withNodeId("node1");
+    // FIXME cgu [REVIEW]: 1401
     lastNotification2Node1.withCreationTime(DateUtility.parse("20220922 140001", "yyyyMMdd HHmm"));
 
     m_registry.put(createMessage(), "topic", noTransaction());
     UiNotificationDo lastNotification2Node2 = m_registry.getNotifications().get("topic").get(3).getNotification();
     lastNotification2Node2.withNodeId("node2");
+    // FIXME cgu [REVIEW]: 1400
     lastNotification2Node2.withCreationTime(DateUtility.parse("20220922 140000", "yyyyMMdd HHmm"));
 
     // Return notifications from both nodes
@@ -213,6 +217,7 @@ public class UiNotificationRegistryTest {
     m_registry.put(createMessage(), "topic", noTransaction());
     UiNotificationDo lastNotificationNode3 = m_registry.getNotifications().get("topic").get(4).getNotification();
     lastNotificationNode3.withNodeId("node3");
+    // FIXME cgu [REVIEW]: 1410
     lastNotificationNode3.withCreationTime(DateUtility.parse("20220922 140010", "yyyyMMdd HHmm"));
 
     assertEquals(Arrays.asList(lastNotificationNode3), m_registry.get(Arrays.asList(createTopic("topic", lastNotification2Node1, lastNotification2Node2)), null));
@@ -220,7 +225,7 @@ public class UiNotificationRegistryTest {
     // No new notifications available
     assertEquals(new ArrayList<>(), m_registry.get(Arrays.asList(createTopic("topic", lastNotification2Node1, lastNotification2Node2, lastNotificationNode3)), null));
   }
-
+  // FIXME cgu [REVIEW]: multiple empty lines
 
   @Test
   public void testGetWithLastNotificationMultipleNodesExistingTopics() {
@@ -233,6 +238,7 @@ public class UiNotificationRegistryTest {
     m_registry.put(createMessage(), "topic", noTransaction());
     UiNotificationDo lastNotificationNode2 = m_registry.getNotifications().get("topic").get(1).getNotification();
     lastNotificationNode2.withNodeId("node2");
+    // FIXME cgu [REVIEW]: 1359
     lastNotificationNode2.withCreationTime(DateUtility.parse("20220922 130059", "yyyyMMdd HHmm")); // The time of Node 2 is slightly behind Node 1
 
     UiNotificationDo node1Subscription = asSubscriptionStartNotification(lastNotificationNode1);
@@ -249,18 +255,21 @@ public class UiNotificationRegistryTest {
     m_registry.put(createMessage(), "topic", noTransaction());
     UiNotificationDo lastNotification2Node1Old = m_registry.getNotifications().get("topic").get(2).getNotification();
     lastNotification2Node1Old.withNodeId("node1");
+    // FIXME cgu [REVIEW]: 1200
     lastNotification2Node1Old.withCreationTime(DateUtility.parse("20220922 120000", "yyyyMMdd HHmm"));
 
     // Valid notification by node1
     m_registry.put(createMessage(), "topic", noTransaction());
     UiNotificationDo lastNotification3Node1 = m_registry.getNotifications().get("topic").get(3).getNotification();
     lastNotification3Node1.withNodeId("node1");
+    // FIXME cgu [REVIEW]: 1410
     lastNotification3Node1.withCreationTime(DateUtility.parse("20220922 140010", "yyyyMMdd HHmm"));
 
     // Server 3 has a bad time, but since there weren't any notifications created by that node at the subscription time, it will be returned
     m_registry.put(createMessage(), "topic", noTransaction());
     UiNotificationDo lastNotificationNode3 = m_registry.getNotifications().get("topic").get(4).getNotification();
     lastNotificationNode3.withNodeId("node3");
+    // FIXME cgu [REVIEW]: 1355
     lastNotificationNode3.withCreationTime(DateUtility.parse("20220922 130055", "yyyyMMdd HHmm"));
 
     // Return valid one from node 1 and new one from node3
@@ -548,4 +557,4 @@ public class UiNotificationRegistryTest {
     return notification;
   }
 }
-
+// FIXME cgu [REVIEW]: multiple empty lines

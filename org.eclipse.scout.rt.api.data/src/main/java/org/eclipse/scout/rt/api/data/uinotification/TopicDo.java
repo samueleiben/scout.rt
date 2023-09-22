@@ -18,6 +18,7 @@ import org.eclipse.scout.rt.dataobject.DoEntity;
 import org.eclipse.scout.rt.dataobject.DoList;
 import org.eclipse.scout.rt.dataobject.DoValue;
 
+// FIXME cgu [REVIEW]: typeName?
 public class TopicDo extends DoEntity {
 
   public DoValue<String> name() {

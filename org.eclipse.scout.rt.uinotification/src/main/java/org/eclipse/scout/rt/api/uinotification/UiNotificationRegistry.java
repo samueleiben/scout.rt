@@ -50,6 +50,7 @@ import org.slf4j.LoggerFactory;
 
 @ApplicationScoped
 public class UiNotificationRegistry {
+  // FIXME cgu [REVIEW]: add empty line
   private IdGenerator m_idGenerator = new IdGenerator();
   private ReadWriteLock m_lock = new ReentrantReadWriteLock();
   /**
@@ -200,6 +201,7 @@ public class UiNotificationRegistry {
     if (lastNotificationByNode.isEmpty()) {
       // Next attempt will get all notifications for this topic
       lastNotifications.add(new UiNotificationDo()
+          // FIXME cgu [REVIEW]: maybe add a constant for the id
           .withId("-1")
           .withTopic(topic)
           .withCreationTime(new Date(0))
@@ -224,7 +226,7 @@ public class UiNotificationRegistry {
    *
    * @see #put(IDoEntity, String, String, UiNotificationPutOptions)
    */
-  public void put(IDoEntity message, String topic) {
+  public void put(IDoEntity message, String topic) { // FIXME cgu [REVIEW]: make topic first argument
     put(message, topic, null, null);
   }
 

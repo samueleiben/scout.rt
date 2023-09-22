@@ -11,6 +11,7 @@
 import {DoEntity} from '../index';
 
 export interface UiNotificationDo extends DoEntity {
+  // FIXME cgu [REVIEW]: _type?
   id: string;
   topic: string;
   nodeId: string;

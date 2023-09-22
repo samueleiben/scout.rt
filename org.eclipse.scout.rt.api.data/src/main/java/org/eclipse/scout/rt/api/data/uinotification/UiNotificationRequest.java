@@ -17,6 +17,7 @@ import javax.annotation.Generated;
 import org.eclipse.scout.rt.dataobject.DoEntity;
 import org.eclipse.scout.rt.dataobject.DoList;
 
+// FIXME cgu [REVIEW]: typeName?
 public class UiNotificationRequest extends DoEntity {
 
   public DoList<TopicDo> topics() {

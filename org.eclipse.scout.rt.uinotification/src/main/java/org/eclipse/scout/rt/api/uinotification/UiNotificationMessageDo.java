@@ -17,8 +17,9 @@ import org.eclipse.scout.rt.api.data.uinotification.UiNotificationDo;
 import org.eclipse.scout.rt.dataobject.DoEntity;
 import org.eclipse.scout.rt.dataobject.DoValue;
 
+// FIXME cgu [REVIEW]: typeName?
 public class UiNotificationMessageDo extends DoEntity implements Serializable {
-  private static final long serialVersionUID = 2839805301562056951L;
+  private static final long serialVersionUID = 2839805301562056951L; // FIXME cgu [REVIEW]: 1L
 
   public DoValue<String> user() {
     return doValue("user");

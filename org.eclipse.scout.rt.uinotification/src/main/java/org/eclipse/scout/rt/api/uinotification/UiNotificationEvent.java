@@ -14,7 +14,7 @@ import java.util.EventObject;
 import org.eclipse.scout.rt.api.data.uinotification.UiNotificationDo;
 
 public class UiNotificationEvent extends EventObject {
-  private static final long serialVersionUID = 3537800577562939639L;
+  private static final long serialVersionUID = 3537800577562939639L; // FIXME cgu [REVIEW]: 1L
   private UiNotificationDo m_notification;
 
   public UiNotificationEvent(Object source, UiNotificationDo notification) {

@@ -89,7 +89,7 @@ export class UiNotificationPoller extends PropertyEventEmitter {
     if (this.status === BackgroundJobPollingStatus.STOPPED) {
       return;
     }
-    this._call?.abort();
+    this._call?.abort(); // FIXME cgu [REVIEW]: if the call is already resolved this will not reject it, and therefore the _schedulePoll after a successful call is executed
     this.setStatus(BackgroundJobPollingStatus.STOPPED);
   }
 
@@ -127,6 +127,7 @@ export class UiNotificationPoller extends PropertyEventEmitter {
     let notifications = response.notifications || [];
     $.log.isInfoEnabled() && $.log.info(`${notifications.length} UI notification(s) received.`);
     notifications = notifications.filter(notification => {
+      // FIXME cgu [REVIEW]: "let {topic, id, nodeId} = notification;"?
       let topic = notification.topic;
       let id = notification.id;
       let nodeId = notification.nodeId;
@@ -205,11 +206,13 @@ export class UiNotificationPoller extends PropertyEventEmitter {
 }
 
 export interface UiNotificationResponse {
+  // FIXME cgu [REVIEW]: _type?
   notifications: UiNotificationDo[];
   error?: JsonErrorResponse;
 }
 
 export interface TopicDo {
+  // FIXME cgu [REVIEW]: _type?
   name: string;
   lastNotifications: UiNotificationDo[]; // Message is always empty
 }

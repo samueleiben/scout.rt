@@ -16,7 +16,7 @@ import org.eclipse.scout.rt.dataobject.IDataObjectMapper;
 import org.eclipse.scout.rt.platform.BEANS;
 
 public class UiNotificationClusterMessage implements Serializable {
-  private static final long serialVersionUID = -7428822698493687446L;
+  private static final long serialVersionUID = -7428822698493687446L; // FIXME cgu [REVIEW]: 1L
   private String m_json;
 
   public UiNotificationClusterMessage(UiNotificationMessageDo notification) {
